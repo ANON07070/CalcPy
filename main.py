@@ -12,6 +12,22 @@ print(f'voce escolher {n1} como primeiro numero')
 n2 = float(input('Segundo numero: '))
 print(f'voce escolheu {n2} como segundo numero')
 
+#confimaçao se o n2 nao e 0
+if n2 == 0:
+    print('''
+    como voce escolheu 0 no segundo numero isso ira fecha o pragrama se voce selecio divisao
+    ''')
+
+confimacao = input('voce quer continuar? (S/N): ')
+if confimacao == 'S':
+    print ('''
+    voce foi avisado''')
+else:
+    print ('''
+    boa escolhar
+    ''')
+    exit()
+
 #Explicar como que escolher entre soma e subtaçao
 print('''
       voce poderar escolher entre essas 4 opçoes sendo eles:
