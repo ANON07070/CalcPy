@@ -15,18 +15,18 @@ print(f'voce escolheu {n2} como segundo numero')
 #confimaçao se o n2 nao e 0
 if n2 == 0:
     print('''
-    como voce escolheu 0 no segundo numero isso ira fecha o pragrama se voce selecio divisao
+    como voce escolheu 0 no segundo numero, isso esta certo?
     ''')
-
-confimacao = input('voce quer continuar? (S/N): ')
-if confimacao == 'S':
-    print ('''
-    voce foi avisado''')
-else:
-    print ('''
-    boa escolhar
-    ''')
+    confimacao = input('voce quer continuar? (S/N): ')
+    if confimacao == 'S':
+         print ('''
+    Ok''')
+    else:
+        print ('''
+        entendido, se voce quiser escolher outro numero porfavo inicie novamente o programa
+        ''')
     exit()
+
 
 #Explicar como que escolher entre soma e subtaçao
 print('''
@@ -54,6 +54,9 @@ elif operacao == 3: #multiplicaçao
     print (n1, 'x', n2, '=', n1 * n2)
 
 elif operacao == 4: #divisao
+    if n2 == 0:
+        print('nao da para dividi por 0, se voce quiser escolher outro numeros por favo inicie o programa novamente')
+        exit()
     print (n1, '/', n2, '=', n1 / n2)
 
 
