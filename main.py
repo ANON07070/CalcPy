@@ -2,6 +2,21 @@
 # definindo def #
 #################
 
+#def main
+def main():
+    home()
+    n1, n2 = var()
+    confimacao(n1, n2)
+    conta(n1, n2)
+    
+def var():
+    # Definir os valores da var dos numeros #
+    n1 = float(input('Primeiro numero: ')) #var do primeiro numero
+    print(f'voce escolher {n1} como primeiro numero')
+    n2 = float(input('Segundo numero: ')) #var do segundo numero
+    print(f'voce escolheu {n2} como segundo numero')
+    return n1, n2
+
 #def da Home
 def home():
     print('''\n      Ola!
@@ -9,8 +24,25 @@ def home():
         so poderemos fazer contas de apenas 2 numeros (tanto int e float) e tenhos soma, subtair, multiplicaçao e divisao
         irei adicionar mais coisas depois\n''')
 
+#def da confimaçao se o n2 nao e 0
+def confimacao(n1, n2):
+    if n2 == 0:
+        print('''
+        como voce escolheu 0 no segundo numero, isso esta certo?
+        ''')
+        confimacao = input(str('voce quer continuar? (S/N): '))
+        if confimacao == 'S':
+            print ('''
+        Ok''')
+            return
+        else:
+            print ('''
+            entendido, se voce quiser escolher outro numero porfavo inicie novamente o programa
+            ''')
+        exit()
+
 #def da conta
-def conta():
+def conta(n1, n2):
     #Explicar como que escolher entre soma e subtaçao
     print('''
         voce poderar escolher entre essas 4 opçoes sendo eles:
@@ -48,39 +80,11 @@ def conta():
         ! ERROR !, voce colocou um valor que nao tava disponivel, porfavo inicie o programa novamente
         ''')
 
-#def da confimaçao se o n2 nao e 0
-def confimacao():
-    if n2 == 0:
-        print('''
-        como voce escolheu 0 no segundo numero, isso esta certo?
-        ''')
-        confimacao = input('voce quer continuar? (S/N): ')
-        if confimacao == 'S':
-            print ('''
-        Ok''')
-            conta() #chama da def conta
-        else:
-            print ('''
-            entendido, se voce quiser escolher outro numero porfavo inicie novamente o programa
-            ''')
-        exit()
+
 
 
 ##############################
 # Chamando def e defindo var #
 ##############################
 
-#chamandoa def home
-home()
-
-# Definir os valores da var dos numeros #
-n1 = float(input('Primeiro numero: ')) #var do primeiro numero
-print(f'voce escolher {n1} como primeiro numero')
-n2 = float(input('Segundo numero: ')) #var do segundo numero
-print(f'voce escolheu {n2} como segundo numero')
-
-#chamando a def de confimaçao
-confimacao()
-
-#chamando a def de conta
-conta()
+main()
