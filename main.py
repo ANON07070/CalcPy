@@ -1,13 +1,58 @@
-#################
+import argparse
+def info():
+    parser = argparse.ArgumentParser(description='''\n
+    Calculadora simples
+
+    de inicio voce precisa colocar dois numeros, e depois escolher entre soma, subtraçao, multiplicaçao e divisao
+    a escolha funciona assim, voce coloca o primeiro numero e em seguinda ira coloca o segundo numero, apois isso ira aparece uma opçao de 1 a 4 sendo eles
+    1 = soma
+    2 = subtaçao
+    3 = multiplicaçao
+    4 = diviçao
+    \n''')    
+    parser.add_argument('--version', action='version', version='1.0')
+    parser.add_argument('n1', type=float, help='Primeiro numero')
+    parser.add_argument('n2', type=float, help='Segundo numero')
+    parser.add_argument('-O', '--operacao', type=int, choices=[1, 2, 3, 4],
+    
+                        required=True, help='1 = soma, 2 = subtração, 3 = multiplicação, 4 = divisão')
+    args = parser.parse_args()
+    return args
+
+def conta_argparse(n1, n2, operacao):
+    if operacao == 4 and n2 == 0:
+        print('Erro: não é possível dividir por 0')
+        return
+    operacoes = {
+        1: ('+', n1 + n2),
+        2: ('-', n1 - n2),
+        3: ('x', n1 * n2),
+        4: ('/', n1 / n2 if n2 != 0 else None)
+    }
+    simbolo, resultado = operacoes[operacao]
+    print(f'{n1} {simbolo} {n2} = {resultado}')
+
 # definindo def #
-#################
 
 #def main
+
 def main():
+    # Se houver argumentos no terminal,
+    # usa o argparse.
+    import sys
+
+    if len(sys.argv) > 1:
+        args = info()
+        conta_argparse(args.n1, args.n2, args.operacao)
+        return
+
+    # Se não houver argumentos,
+    # usa o modo normal.
     home()
     n1, n2 = var()
     confimacao(n1, n2)
     conta(n1, n2)
+
     
 def var():
     # Definir os valores da var dos numeros #
@@ -19,10 +64,9 @@ def var():
 
 #def da Home
 def home():
-    print('''\n      Ola!
-        Bem vindo ao calc do anonimo feito em python
-        so poderemos fazer contas de apenas 2 numeros (tanto int e float) e tenhos soma, subtair, multiplicaçao e divisao
-        irei adicionar mais coisas depois\n''')
+    print('''\n
+        Bem-vindo ao calc do anon feito em python
+        \n''')
 
 #def da confimaçao se o n2 nao e 0
 def confimacao(n1, n2):
@@ -87,4 +131,5 @@ def conta(n1, n2):
 # Chamando def e defindo var #
 ##############################
 
-main()
+if __name__ == "__main__":
+    main()
