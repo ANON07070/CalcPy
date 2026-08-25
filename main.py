@@ -1,4 +1,7 @@
 import argparse
+
+
+# defs do argparse
 def info():
     parser = argparse.ArgumentParser(description='''\n
     Calculadora simples
@@ -32,10 +35,6 @@ def conta_argparse(n1, n2, operacao):
     simbolo, resultado = operacoes[operacao]
     print(f'{n1} {simbolo} {n2} = {resultado}')
 
-# definindo def #
-
-#def main
-
 def main():
     # Se houver argumentos no terminal,
     # usa o argparse.
@@ -53,83 +52,89 @@ def main():
     confimacao(n1, n2)
     conta(n1, n2)
 
-    
-def var():
-    # Definir os valores da var dos numeros #
-    n1 = float(input('Primeiro numero: ')) #var do primeiro numero
-    print(f'voce escolher {n1} como primeiro numero')
-    n2 = float(input('Segundo numero: ')) #var do segundo numero
-    print(f'voce escolheu {n2} como segundo numero')
+
+# def do codigo CLI
+def var():     #Definir os valores da var dos numeros
+    while True:
+        try:
+            n1 = float(input('Primeiro numero: ')) #var do primeiro numero
+            print(f'Voce escolher {n1} como primeiro numero')
+            break
+        except ValueError:
+            print('Por favor, insira um número válido.')
+    while True:
+        try:
+            n2 = float(input('Segundo numero: ')) #var do segundo numero
+            print(f'Voce escolheu {n2} como segundo numero')
+            break
+        except ValueError:
+            print('Por favor, insira um número válido.')
     return n1, n2
 
-#def da Home
-def home():
+
+def home():     #Definir a home do programa
     print('''\n
-        Bem-vindo ao calc do anon feito em python
+Bem-vindo ao calc do anon feito em python
         \n''')
 
-#def da confimaçao se o n2 nao e 0
-def confimacao(n1, n2):
+def confimacao(n1, n2):     #Definir a confimaçao do programa
     if n2 == 0:
         print('''
-        como voce escolheu 0 no segundo numero, isso esta certo?
+Como voce colocou 0 como segundo numero, nao da para dividir por 0
         ''')
-        confimacao = input(str('voce quer continuar? (S/N): '))
+        confimacao = input(str('Voce quer continuar? (S/N): '))
         if confimacao == 'S':
             print ('''
-        Ok''')
+Ok''')
             return
         else:
             print ('''
-            entendido, se voce quiser escolher outro numero porfavo inicie novamente o programa
+Entendo, por favor inicie o programa novamente e coloque um valor correto
             ''')
         exit()
 
-#def da conta
-def conta(n1, n2):
+def conta(n1, n2):      #Definir a conta do programa
     #Explicar como que escolher entre soma e subtaçao
     print('''
-        voce poderar escolher entre essas 4 opçoes sendo eles:
+Voce precisa escolher entre as seguintes operaçoes:
 
         soma: 1
         subtaçao: 2
         multiplicaçao: 3
         divisao: 4
 
-        caso coloque um valor errado iriar da erro e o calc vai fecha
+caso coloque um valor errado iriar da erro
         ''')
 
-    #Valor da var operaçao e tambem a parte das contas
-    operacao = int(input('operaçao: '))
 
+    while True:
+        try:
+            operacao = int(input('operação: '))
+            break
+        except ValueError:
+            print('Por favor, insira um número válido.')
 
     if operacao == 1: #soma
-        print (n1, '+', n2, '=', n1 + n2)
+        print (f'{n1} + {n2} = {n1 + n2}')
 
     elif operacao == 2: #subtaçao
-        print (n1, '-', n2, '=', n1 - n2)
+        print (f'{n1} - {n2} = {n1 - n2}')
 
     elif operacao == 3: #multiplicaçao
-        print (n1, 'x', n2, '=', n1 * n2)
+        print (f'{n1} x {n2} = {n1 * n2}')
 
     elif operacao == 4: #divisao
         if n2 == 0:
-            print('nao da para dividi por 0, se voce quiser escolher outro numeros por favo inicie o programa novamente')
+            print('Não da para dividir por 0, por favor inicie o programa novamente e coloque um valor correto')
             exit()
-        print (n1, '/', n2, '=', n1 / n2)
+        print (f'{n1} / {n2} = {n1 / n2}')
 
 
     else: #valor errado
         print ('''
-        ! ERROR !, voce colocou um valor que nao tava disponivel, porfavo inicie o programa novamente
+! ERROR !
+Voce colocou um valor errado, por favor inicie o programa novamente e coloque um valor correto
         ''')
-
-
-
-
-##############################
-# Chamando def e defindo var #
-##############################
 
 if __name__ == "__main__":
     main()
