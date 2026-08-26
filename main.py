@@ -49,7 +49,7 @@ def main():
     # usa o modo normal.
     home()
     n1, n2 = var()
-    confimacao(n1, n2)
+    confimacao_divicao(n1, n2)
     conta(n1, n2)
 
 
@@ -77,7 +77,7 @@ def home():     #Definir a home do programa
 Bem-vindo ao calc do anon feito em python
         \n''')
 
-def confimacao(n1, n2):     #Definir a confimaçao do programa
+def confimacao_divicao(n1, n2):     #Definir a confimaçao do programa
     if n2 == 0:
         print('''
 Como voce colocou 0 como segundo numero, nao da para dividir por 0
@@ -110,31 +110,45 @@ caso coloque um valor errado iriar da erro
     while True:
         try:
             operacao = int(input('operação: '))
+            if operacao not in [1, 2, 3, 4]:
+                print('Por favor, insira um número válido entre 1 e 4.')
+                continue
             break
         except ValueError:
             print('Por favor, insira um número válido.')
 
-    if operacao == 1: #soma
-        print (f'{n1} + {n2} = {n1 + n2}')
+    operacao_dicionario ={
+        1: ('+', n1 + n2),
+        2: ('-', n1 - n2),
+        3: ('*', n1 * n2),
+        4: ('/', n1 / n2 if n2 != 0 else None)
+    }
 
-    elif operacao == 2: #subtaçao
-        print (f'{n1} - {n2} = {n1 - n2}')
+    resultado = operacao_dicionario.get(operacao)
+    if resultado and resultado[1] is not None:
+        print(f'{n1} {resultado[0]} {n2} = {resultado[1]}')
+    elif operacao == 4 and n2 == 0:
+        print('Erro: não é possível dividir por 0')
+    nova_conta()
 
-    elif operacao == 3: #multiplicaçao
-        print (f'{n1} x {n2} = {n1 * n2}')
-
-    elif operacao == 4: #divisao
-        if n2 == 0:
-            print('Não da para dividir por 0, por favor inicie o programa novamente e coloque um valor correto')
+def nova_conta():
+    while True:
+        nova_conta = input(str('Voce quer fazer uma nova conta? (S/N): '))
+        if nova_conta == 'S' or 's':
+            print ('''
+Ok, vamos fazer uma nova conta
+            ''')
+            n1, n2 = var()
+            confimacao_divicao(n1, n2)
+            conta(n1, n2)
+            break
+        else:
+            print ('''Ok, entendo, por favor inicie o programa novamente caso queira fazer uma nova conta''')
             exit()
-        print (f'{n1} / {n2} = {n1 / n2}')
-
-
-    else: #valor errado
-        print ('''
-! ERROR !
-Voce colocou um valor errado, por favor inicie o programa novamente e coloque um valor correto
-        ''')
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\n\nPrograma interrompido.')
+        exit()
